@@ -14,7 +14,11 @@ body{
 }
 .content {
     max-width: 1200px;
+<<<<<<< HEAD
     min-height: 900px;
+=======
+    min-height: 100vh;
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
     margin: 0 auto;
 }
 .recipe__content{
@@ -171,7 +175,11 @@ nav .btn{
 .recipe-edit-area {
     width: 100%;
     max-width: 736px;
+<<<<<<< HEAD
     min-height: 100%;
+=======
+    height: 65vh;
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
     // align-self: end; //Turn down when item selected
 }
 
@@ -179,7 +187,11 @@ nav .btn{
 .recipe-not-open--block {
     width: 100%;
     max-width: 100%;
+<<<<<<< HEAD
     min-height: 554px;
+=======
+    height: 100%;
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
     border: 5px dashed rgb(136, 153, 153);
     border-radius: 20px 20px 40px 40px;
     display: flex;
@@ -204,7 +216,11 @@ nav .btn{
     margin-top: 10px;
     width: 100%;
     max-width: 100%;
+<<<<<<< HEAD
     // min-height: 554px;
+=======
+    min-height: 100%;
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
     border: 5px solid rgb(217, 4, 41);
     background-color: #fff;
     border-radius: 20px 20px 40px 40px;

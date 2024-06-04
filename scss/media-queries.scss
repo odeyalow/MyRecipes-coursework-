@@ -135,8 +135,12 @@
         position: relative; 
     }
     .recipe-edit-area{
+<<<<<<< HEAD
         padding:0 20px 20px 20px;
         // height: 100%;
+=======
+        padding:0 20px 0 20px;
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
     }
     .recipe-edit-area .title{
         margin-top: 0;
@@ -160,9 +164,12 @@
     .title{
         font-size: 30px;
     }
+<<<<<<< HEAD
     .modals{
         height: 100vh;
     }
+=======
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
 }
 @media (max-width: 480px) {
     nav{
@@ -273,12 +280,16 @@
         max-width: 170px;
     }
 
+<<<<<<< HEAD
     .delete-description__modal .title{
         font-size: 30px;
     }
     .delete-description__modal .btn{
         font-size: 30px;
     }
+=======
+    
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
 }
 @media (max-width: 320px) {
     .main{
@@ -418,7 +429,11 @@
     }
 
     .modal-btns--block{
+<<<<<<< HEAD
         flex-direction: column-reverse;
+=======
+        flex-direction: column-reverse  ;
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
         row-gap: 10px;
     }
     .cancel-btn{
@@ -427,6 +442,7 @@
     .create-btn{
         max-width: 100%;
     }
+<<<<<<< HEAD
 
     .delete-description__modal .title{
         font-size: 25px;
@@ -434,4 +450,6 @@
     .delete-description__modal .btn{
         font-size: 30px;
     }
+=======
+>>>>>>> a1f0d26 (First commit cause i forgot to commit)
 }

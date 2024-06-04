@@ -1,0 +1,435 @@
+@media (max-width: 1200px) {
+  .edit__container {
+    padding: 0 33px;
+    max-width: 472px;
+  }
+  .recipe-edit-area {
+    padding-right: 33px;
+  }
+}
+@media (max-width: 920px) {
+  nav {
+    padding: 0 25px;
+  }
+  .recipe__content {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .recipes-list__container {
+    max-width: 100%;
+  }
+  .recipe-edit-area {
+    padding-right: 20px;
+    max-width: 100%;
+  }
+  .recipe-edit-area .title {
+    margin-top: -26px;
+  }
+  .edit__container {
+    padding: 0 20px;
+    max-width: 350px;
+  }
+  .list-edit__container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .edit-btns--block {
+    width: 100%;
+    max-width: 105px;
+    -webkit-column-gap: 13px;
+       -moz-column-gap: 13px;
+            column-gap: 13px;
+  }
+  .title {
+    font-size: 36px;
+    -ms-flex-item-align: end;
+        -ms-grid-row-align: end;
+        align-self: end;
+  }
+  .edit__container .btn {
+    max-width: 46px;
+    height: 46px;
+    -webkit-column-gap: 13px;
+       -moz-column-gap: 13px;
+            column-gap: 13px;
+  }
+  .list .item {
+    height: 63px;
+    font-size: 30px;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  .recipe-open--block {
+    width: 100%;
+    max-width: 100%;
+  }
+  .recipe-open-text {
+    font-size: 30px;
+  }
+  .recipe-edit-area .title {
+    font-size: 68px;
+  }
+  .ingridient-name {
+    height: 45px;
+    font-size: 20px;
+  }
+  .ingridient-amount {
+    width: 80px;
+    height: 45px;
+    font-size: 20px;
+  }
+  .ingridient-unit {
+    height: 45px;
+  }
+  .recipe-open--block .btn {
+    min-height: 45px;
+    border-radius: 15px;
+    font-size: 20px;
+  }
+  .add-ingidient-btn {
+    max-width: 175px;
+  }
+  .add-description-btn {
+    max-width: 190px;
+  }
+  .delete-description-btn {
+    max-width: 215px;
+  }
+  .ingridient-and-numbering {
+    -webkit-column-gap: 5px;
+       -moz-column-gap: 5px;
+            column-gap: 5px;
+  }
+  .ingridient-numbering {
+    font-size: 20px;
+  }
+}
+@media (max-width: 770px) {
+  nav {
+    min-height: 98px;
+    padding: 0 25px;
+  }
+  .logo {
+    max-width: 78px;
+  }
+  .btns--block {
+    max-width: 173px;
+    -webkit-column-gap: 15px;
+       -moz-column-gap: 15px;
+            column-gap: 15px;
+  }
+  .dwnld-upld-btns--block {
+    width: 100%;
+    max-width: 108px;
+    -webkit-column-gap: 8px;
+       -moz-column-gap: 8px;
+            column-gap: 8px;
+  }
+  nav .btn {
+    max-width: 50px;
+    height: 50px;
+    border-radius: 20px;
+  }
+  .btn-icon {
+    max-width: 30px;
+  }
+  .lang-change-btn {
+    font-size: 25px;
+  }
+  .recipe__content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative;
+  }
+  .recipe-edit-area {
+    padding: 0 20px 0 20px;
+  }
+  .recipe-edit-area .title {
+    margin-top: 0;
+  }
+  .edit__container {
+    padding: 50px 10px 20px 20px;
+    max-width: 100%;
+    overflow-y: scroll;
+  }
+  .recipes-list__container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .list {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+    height: 12.5vh;
+  }
+  .title {
+    font-size: 30px;
+  }
+}
+@media (max-width: 480px) {
+  nav {
+    min-height: 98px;
+    padding: 0 25px;
+  }
+  .logo {
+    max-width: 78px;
+  }
+  .btns--block {
+    max-width: 173px;
+    -webkit-column-gap: 15px;
+       -moz-column-gap: 15px;
+            column-gap: 15px;
+  }
+  .dwnld-upld-btns--block {
+    width: 100%;
+    max-width: 108px;
+    -webkit-column-gap: 8px;
+       -moz-column-gap: 8px;
+            column-gap: 8px;
+  }
+  nav .btn {
+    max-width: 50px;
+    height: 50px;
+    border-radius: 20px;
+  }
+  .btn-icon {
+    max-width: 30px;
+  }
+  .lang-change-btn {
+    font-size: 25px;
+  }
+  .recipe__content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative;
+  }
+  .recipe-edit-area {
+    padding: 0 20px 0 20px;
+  }
+  .edit__container {
+    padding: 50px 10px 20px 20px;
+    max-width: 100%;
+    overflow-y: scroll;
+  }
+  .recipes-list__container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .list {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+    height: 12.5vh;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .description {
+    font-size: 15px;
+  }
+  .recipe-open--block {
+    padding: 15px;
+  }
+  .add-new-recipe__form {
+    display: -ms-grid;
+    display: grid;
+    row-gap: 7px;
+  }
+  .ingridient-name {
+    padding: 0 10px;
+  }
+  .ingridient-amount {
+    width: 100px;
+    padding: 0 10px;
+  }
+  .ingridient-unit {
+    padding: 0 5px;
+    max-width: 100px;
+  }
+  .add-new-recipe__modal {
+    max-width: 350px;
+    min-height: 203px;
+  }
+  .add-new-recipe__modal .title {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .add-new-recipe__modal .ingridient-name {
+    width: 100%;
+    height: 47px;
+    border-radius: 15px;
+  }
+  .modal-btns--block {
+    -webkit-column-gap: 15px;
+       -moz-column-gap: 15px;
+            column-gap: 15px;
+  }
+  .add-new-recipe__modal .btn {
+    height: 47px;
+    border-radius: 15px;
+    font-size: 24px;
+  }
+  .cancel-btn {
+    max-width: 125px;
+  }
+  .create-btn {
+    max-width: 170px;
+  }
+}
+@media (max-width: 320px) {
+  .main {
+    min-width: 250px;
+  }
+  nav {
+    min-height: 66px;
+  }
+  .logo {
+    max-width: 55px;
+  }
+  .btns--block {
+    max-width: 105px;
+    -webkit-column-gap: 10px;
+       -moz-column-gap: 10px;
+            column-gap: 10px;
+  }
+  .dwnld-upld-btns--block {
+    max-width: 65px;
+    -webkit-column-gap: 5px;
+       -moz-column-gap: 5px;
+            column-gap: 5px;
+  }
+  nav .btn {
+    max-width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  .btn-icon {
+    max-width: 20px;
+  }
+  .lang-change-btn {
+    font-size: 20px;
+  }
+  .list-edit__container {
+    margin-top: 15px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    row-gap: 10px;
+  }
+  .title {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  .edit-btns--block {
+    max-width: 103px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .edit__container .btn {
+    max-width: 48px;
+    max-height: 32px;
+    border-radius: 10px;
+  }
+  .edit__container .icon {
+    max-width: 17.5px;
+  }
+  .list {
+    max-width: 100%;
+    height: 90px;
+    padding: 12.5px;
+  }
+  .items__container {
+    padding: 0;
+  }
+  .list .item {
+    max-width: 100%;
+    font-size: 25px;
+    margin-bottom: 12.5px;
+    padding: 15px;
+  }
+  .recipe-edit-area .title {
+    font-size: 45px;
+    text-align: center;
+  }
+  .recipe-open-text {
+    font-size: 24px;
+  }
+  .recipe-open--block .btn {
+    font-size: 15px;
+    padding: 0 15px;
+    min-height: 35px;
+  }
+  .add-ingidient-btn {
+    max-width: 130px;
+  }
+  .line {
+    height: 3px;
+  }
+  .add-description-btn {
+    max-width: 141px;
+  }
+  .description {
+    padding: 10px;
+    font-size: 12.5px;
+  }
+  .ingridient-name {
+    height: 35px;
+    font-size: 15px;
+  }
+  .amount-unit--block {
+    -webkit-column-gap: 5px;
+       -moz-column-gap: 5px;
+            column-gap: 5px;
+  }
+  .ingridient-amount {
+    height: 35px;
+    width: 100%;
+    max-width: 170px;
+  }
+  .ingridient-unit {
+    width: 100%;
+    height: 35px;
+    min-width: 65px;
+    max-width: 65px;
+    font-size: 15px;
+  }
+  .modal-btns--block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    row-gap: 10px;
+  }
+  .cancel-btn {
+    max-width: 100%;
+  }
+  .create-btn {
+    max-width: 100%;
+  }
+}

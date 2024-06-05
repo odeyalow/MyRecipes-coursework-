@@ -295,6 +295,12 @@
   .create-btn {
     max-width: 170px;
   }
+  .delete-description__modal .title {
+    font-size: 30px;
+  }
+  .delete-description__modal .btn {
+    font-size: 30px;
+  }
 }
 @media (max-width: 320px) {
   .main {
@@ -434,5 +440,11 @@
   }
   .create-btn {
     max-width: 100%;
+  }
+  .delete-description__modal .title {
+    font-size: 25px;
+  }
+  .delete-description__modal .btn {
+    font-size: 30px;
   }
 }

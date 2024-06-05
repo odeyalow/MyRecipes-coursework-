@@ -90,7 +90,6 @@ body {
   max-width: 1200px;
   min-height: 100%;
   margin: 0 auto;
-  padding-bottom: 30px;
 }
 
 .recipe__content {
@@ -228,14 +227,6 @@ nav .btn:active {
   -webkit-transition: 300ms ease;
   transition: 300ms ease;
 }
-.edit__container .btn:hover {
-  -webkit-transform: scale(105%);
-          transform: scale(105%);
-}
-.edit__container .btn:active {
-  -webkit-transform: scale(95%);
-          transform: scale(95%);
-}
 
 .edit__container .icon {
   max-width: 25px;
@@ -295,12 +286,15 @@ nav .btn:active {
   width: 100%;
   max-width: 736px;
   min-height: 100%;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
 }
 
 .recipe-not-open--block {
   width: 100%;
   max-width: 100%;
-  min-height: 554px;
+  min-height: 605px;
   border: 5px dashed rgb(136, 153, 153);
   border-radius: 20px 20px 40px 40px;
   display: -webkit-box;
@@ -362,14 +356,6 @@ nav .btn:active {
   padding: 0 20px;
   -webkit-transition: 300ms ease;
   transition: 300ms ease;
-}
-.recipe-open--block .btn:hover {
-  -webkit-transform: scale(105%);
-          transform: scale(105%);
-}
-.recipe-open--block .btn:active {
-  -webkit-transform: scale(95%);
-          transform: scale(95%);
 }
 
 .add-ingidient-btn {
@@ -531,6 +517,11 @@ nav .btn:active {
       -ms-flex-align: center;
           align-items: center;
   padding: 0 20px;
+  display: none;
+}
+
+.modals .modal {
+  display: none;
 }
 
 .add-new-recipe__modal {
@@ -617,14 +608,6 @@ nav .btn:active {
   transition: 300ms ease;
   font-weight: 700;
 }
-.add-new-recipe__modal .btn:hover {
-  -webkit-transform: scale(105%);
-          transform: scale(105%);
-}
-.add-new-recipe__modal .btn:active {
-  -webkit-transform: scale(95%);
-          transform: scale(95%);
-}
 
 .cancel-btn {
   max-width: 180px;
@@ -685,9 +668,19 @@ nav .btn:active {
 .btn-allowed {
   background: rgb(141, 153, 174);
   color: rgb(237, 242, 244);
+  cursor: pointer;
+}
+.btn-allowed:hover {
+  -webkit-transform: scale(105%);
+          transform: scale(105%);
+}
+.btn-allowed:active {
+  -webkit-transform: scale(95%);
+          transform: scale(95%);
 }
 
 .btn-not-allowed {
   background: rgb(43, 45, 66);
   color: rgb(64, 66, 90);
+  cursor: not-allowed;
 }

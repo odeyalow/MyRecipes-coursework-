@@ -1,7 +1,6 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-    //Auto-resize textarea
     const descr = document.querySelector('textarea');
 
     function autoResizeTextarea(){
@@ -9,15 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         descr.style.height = descr.scrollHeight + 'px';
         descr.scrollIntoView();
     }
-    descr.addEventListener('keyup', () => {
-        autoResizeTextarea();
-    })
-    descr.addEventListener('keydown', e => {
-        autoResizeTextarea();
-    })
-    window.addEventListener('resize', () => autoResizeTextarea());
-
-    //Auto-resize textarea
-
-
+    descr.addEventListener('keyup', autoResizeTextarea())
+    descr.addEventListener('keydown', autoResizeTextarea())
+    window.addEventListener('resize', autoResizeTextarea());
 })

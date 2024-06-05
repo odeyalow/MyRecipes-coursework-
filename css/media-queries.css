@@ -177,6 +177,9 @@
   .title {
     font-size: 30px;
   }
+  .modals {
+    height: 100vh;
+  }
 }
 @media (max-width: 480px) {
   nav {

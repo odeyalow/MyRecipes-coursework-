@@ -338,7 +338,7 @@ nav .btn{
 .modals {
     width: 100%;
     max-width: 100vw;
-    height: 100vh;
+    min-height: 900px;
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0;

@@ -160,6 +160,9 @@
     .title{
         font-size: 30px;
     }
+    .modals{
+        height: 100vh;
+    }
 }
 @media (max-width: 480px) {
     nav{
@@ -269,8 +272,6 @@
     .create-btn{
         max-width: 170px;
     }
-
-
 }
 @media (max-width: 320px) {
     .main{
@@ -410,7 +411,7 @@
     }
 
     .modal-btns--block{
-        flex-direction: column-reverse  ;
+        flex-direction: column-reverse;
         row-gap: 10px;
     }
     .cancel-btn{

@@ -14,7 +14,7 @@ body{
 }
 .content {
     max-width: 1200px;
-    height: 100vh;
+    min-height: 900px;
     margin: 0 auto;
 }
 .recipe__content{
@@ -171,7 +171,7 @@ nav .btn{
 .recipe-edit-area {
     width: 100%;
     max-width: 736px;
-    height: 100%;
+    min-height: 100%;
     // align-self: end; //Turn down when item selected
 }
 
@@ -179,7 +179,7 @@ nav .btn{
 .recipe-not-open--block {
     width: 100%;
     max-width: 100%;
-    height: 60vh;
+    min-height: 554px;
     border: 5px dashed rgb(136, 153, 153);
     border-radius: 20px 20px 40px 40px;
     display: flex;
@@ -204,7 +204,7 @@ nav .btn{
     margin-top: 10px;
     width: 100%;
     max-width: 100%;
-    min-height: 554px;
+    // min-height: 554px;
     border: 5px solid rgb(217, 4, 41);
     background-color: #fff;
     border-radius: 20px 20px 40px 40px;

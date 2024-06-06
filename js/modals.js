@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function recipeOpen(){
         const recipeNotOpenedToRemove = document.querySelector('.recipe-not-open--block');
-        recipeEditParent.removeChild(recipeNotOpenedToRemove);
+        recipeNotOpenedToRemove && recipeEditParent.removeChild(recipeNotOpenedToRemove);
         recipeEditParent.style.alignSelf = 'start';
     }
     function recipeClose(){
@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2 class="title">${recipCreateInput.value}</h2>
                     <div class="recipe-open--block">
                         <span class="recipe-open-text recipe-text">Recipe:</span>
+                        <div class="ingridient-and-numbering"></div>
                         <button class="btn add-ingidient-btn">Add ingridient</button>
                         <div class="line"></div>
                         <button class="btn add-description-btn">Add description</button>
@@ -160,7 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btnAllowed(deleteBtn);
             const recipesNotOpenedToRemove = document.querySelectorAll('.recipe-not-open--block'),
             recipeAreas = document.querySelectorAll('.recipe--block');
-            recipeEditParent.removeChild(recipesNotOpenedToRemove);
+            recipesNotOpenedToRemove.forEach(item => {
+                item.remove();
+            });
+            recipeAreas.forEach(item => {
+                item.remove();
+            });
             recipesNotOpenedToRemove.forEach(item => {
                 item.remove();
             })
@@ -178,7 +184,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    const addIngridientBtn = document.querySelector('.add-ingidient-btn');
-
-    
+    // document.body.addEventListener('click', (e) => {
+    //     if (e.target.classList.contains('add-ingidient-btn')) {
+    //         const ingridientsBlock = e.target.previousElementSibling;
+    //         if (ingridientsBlock) {
+    //             //Create a new ingredient element
+    //             const newIngredient = document.createElement('div');
+    //             newIngredient.classList.add('ingridient-and-numbering');
+    //             newIngredient.innerHTML = `
+    //                 <span class="ingridient-numbering">1.</span>
+    //                 <form class="add-new-recipe__form">
+    //                     <input type="text" class="ingridient-name" placeholder="Ingridient name">
+    //                     <div class="amount-unit--block">
+    //                         <input type="tel" class="ingridient-amount" placeholder="0">
+    //                         <select class="ingridient-unit">
+    //                             <option class="unit-option" value="pcs">pcs</option>
+    //                             <option class="unit-option" value="tsp">tsp</option>
+    //                             <option class="unit-option" value="tbsp">tbsp</option>
+    //                             <option class="unit-option" value="cup">cup</option>
+    //                             <option class="unit-option" value="g">g</option>
+    //                             <option class="unit-option" value="kg">kg</option>
+    //                         </select>
+    //                     </div>
+    //                 </form>
+    //             `;
+    //             //Add a new ingredient to the end of the ingredient block
+    //             ingridientsBlock.appendChild(newIngredient);
+    //         }
+    //     }
+    // });
+    document.body.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-ingidient-btn')) {
+            const recipeBlock = e.target.closest('.recipe--block');
+            if (recipeBlock) {
+                const ingridientsBlock = recipeBlock.querySelector('.recipe-open--block .ingridient-and-numbering:last-of-type');
+                if (ingridientsBlock) {
+                    // Создаем новый элемент ингредиента
+                    const newIngredient = document.createElement('div');
+                    newIngredient.classList.add('ingridient-and-numbering');
+                    newIngredient.innerHTML = `
+                        <span class="ingridient-numbering">1.</span>
+                        <form class="add-new-recipe__form">
+                            <input type="text" class="ingridient-name" placeholder="Ingridient name">
+                            <div class="amount-unit--block">
+                                <input type="tel" class="ingridient-amount" placeholder="0">
+                                <select class="ingridient-unit">
+                                    <option class="unit-option" value="pcs">pcs</option>
+                                    <option class="unit-option" value="tsp">tsp</option>
+                                    <option class="unit-option" value="tbsp">tbsp</option>
+                                    <option class="unit-option" value="cup">cup</option>
+                                    <option class="unit-option" value="g">g</option>
+                                    <option class="unit-option" value="kg">kg</option>
+                                </select>
+                            </div>
+                        </form>
+                    `;
+                    // Добавляем новый ингредиент в конец блока ингредиентов текущего рецепта
+                    ingridientsBlock.insertAdjacentElement('afterend', newIngredient);
+                }
+            }
+        }
+    });
 })

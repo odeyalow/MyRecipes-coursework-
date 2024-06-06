@@ -243,6 +243,7 @@ nav .btn{
     width: 100%;
     max-width: 100%;
     display: flex;
+    flex-direction: column;
     column-gap: 10px;
 }
 .add-new-recipe__form {

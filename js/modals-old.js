@@ -4,15 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const recipeCreateBtn = document.querySelector('.add-btn'),
     cancelBtn = document.querySelector('.cancel-btn'),
     modals = document.querySelector('.modals'),
-    modalsItems = document.querySelectorAll('.modal'),
-    recipeEditParent = document.querySelector('.recipe-edit-area');
-    //Dynamic adding recipe not open block
-    let recipeNotOpened = `
-        <div class="recipe-not-open--block">    
-            <p class="text">Create a new recipe or select an existing one</p>
-        </div>
-    `;
-    recipeEditParent.innerHTML += recipeNotOpened;
+    modalsItems = document.querySelectorAll('.modal');
 
     //styles for edit area when recipe Opened or closed
     function openModal(modal){
@@ -55,23 +47,33 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal(modalsItems[0]);
     })
 
+
+    //recipe create modal input validation
     const recipCreateInput = document.querySelector('.ingridient-name'),
     createBtn = document.querySelector('.create-btn'),
     recipesList = document.querySelector('.items__container'),
     deleteBtn = document.querySelector('.delete-btn'),
-    deleteBtnIcon = document.querySelector('.delete-icon');
+    deleteBtnIcon = document.querySelector('.delete-icon'),
+    recipeEditParent = document.querySelector('.recipe-edit-area');
+    // recipeItems = recipesList.querySelectorAll('.item');
 
+
+    //dynamic adding recipe not opened block
+    let recipeNotOpened =  `
+        <div class="recipe-not-open--block">    
+            <p class="text">Create a new recipe or select an existing one</p>
+        </div>
+    `;
+    recipeEditParent.innerHTML = recipeNotOpened;
+    
     //Adding recipe
     createBtn.addEventListener('click', e => {
         e.preventDefault();
         if (createBtn.classList.contains('btn-allowed')){
-            //Changing trash icon src when item selected
-            deleteBtnIcon.src = '/img/icons/delete.png';
-            btnAllowed(deleteBtn);
-            //Closing when creating
+            //closing when creating
             closeModal(modalsItems[0]);
-            //Checking input length for 11 symbols
-            if (recipCreateInput.value.length >= 11) {
+            
+            if (recipCreateInput.value.length >= 9) {
                 recipesList.innerHTML += `
                 <li class="item selected">${recipCreateInput.value.slice(0, 11)}...</li>
                 `;
@@ -80,7 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li class="selected item">${recipCreateInput.value}</li>
                 `;
             }
-            //Replacing new created recipe to the top
+
+            btnAllowed(deleteBtn);
+
             const recipeItems = document.querySelectorAll('li');    
             recipeItems.forEach(item => {
                 item.classList.remove('selected');
@@ -88,44 +92,78 @@ document.addEventListener('DOMContentLoaded', () => {
                 recipeItems[recipeItems.length-1].classList.add('selected');
             })
 
-            //Deleting recipe not open block
-            recipeOpen();
-
-            //Adding recipe edit area
+            let recipeTitleAndArea = `
+                <div class="recipe--block ${recipCreateInput.value}">
+                    <h2 class="title">${recipCreateInput.value}</h2>
+                    <div class="recipe-open--block">
+                        <span class="recipe-open-text recipe-text">Recipe:</span>
+                        <button class="btn add-ingidient-btn">Add ingridient</button>
+                        <div class="line"></div>
+                        <button class="btn add-description-btn">Add description</button>
+                    </div>
+                </div>
+            `;
             
+            const recipeAreas = document.querySelectorAll('.recipe--block');
+            recipeAreas.forEach(item => {
+                item.style.display = 'none';
+            })
 
+            recipeOpen();
+            
+            recipeEditParent.innerHTML += recipeTitleAndArea;
         }
     })
 
+
+    deleteBtn.addEventListener('click', () => {
+        recipesList.forEach(item => {
+            if (item.classList.contains('selected')){
+                remove(item);
+            }
+        })
+    })
+
+
     //Adding styles to recipes(items) and btn when it's active or not
     recipesList.addEventListener('click', e => {
-        const recipeItems = document.querySelectorAll('li');
+        const recipeItems = document.querySelectorAll('li'),
+        recipeAreas = document.querySelectorAll('.recipe--block');
+
         recipeItems.forEach(item => {
             item.classList.remove('selected');
         })
+
+        recipeAreas.forEach(item => {
+            item.style.display = 'none';
+        })
+
         if ( e.target.matches('.item') ) {
             deleteBtnIcon.src = '/img/icons/delete.png';
+            recipesList.prepend(e.target);
             e.target.classList.add('selected');
             btnAllowed(deleteBtn);
-            //Replacing selected item to the top
-            recipesList.prepend(e.target);
-            //Deleting recipe not open block
-            recipeOpen();
-        } else {
-            deleteBtn.classList.add('btn-not-allowed');
-            deleteBtnIcon.src = '/img/icons/delete not available.png';
-            //Adding recipe not open block
-            recipeClose();
-        }
 
-        //Deliting items
-        deleteBtn.addEventListener('click', () => {
-            recipeItems.forEach(item => {
-                if (item.classList.contains('selected')){
-                    item.remove();
+            recipeAreas.forEach(item => {
+                if (item.classList.contains(e.target.textContent)) {
+                    item.style.display = 'block';
                 }
             })
-        })
+        } else {
+            let recipeCloseActive = false;
+            deleteBtn.classList.add('btn-not-allowed');
+            deleteBtnIcon.src = '/img/icons/delete not available.png';
+            if (recipeCloseActive) {
+                recipeClose();
+                recipeCloseActive = false;
+            } else {
+                recipeCloseActive = true;
+            }
+        }
+
+        // recipeItems.forEach(item => {
+        //     console.log(item)
+        // })
     })
 
     //Validating the recipe adding input

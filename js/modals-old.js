@@ -153,12 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let recipeCloseActive = false;
             deleteBtn.classList.add('btn-not-allowed');
             deleteBtnIcon.src = '/img/icons/delete not available.png';
-            if (recipeCloseActive) {
-                recipeClose();
-                recipeCloseActive = false;
-            } else {
-                recipeCloseActive = true;
-            }
         }
 
         // recipeItems.forEach(item => {

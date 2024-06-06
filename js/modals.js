@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelBtn = document.querySelector('.cancel-btn'),
     modals = document.querySelector('.modals'),
     modalsItems = document.querySelectorAll('.modal'),
-    recipeEditParent = document.querySelector('.recipe-edit-area');
+    recipeEditParent = document.querySelector('.recipe-edit-area');    
     //Dynamic adding recipe not open block
     let recipeNotOpened = `
         <div class="recipe-not-open--block">    
@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
     recipeEditParent.innerHTML += recipeNotOpened;
+
+    let active = true;
 
     //styles for edit area when recipe Opened or closed
     function openModal(modal){
@@ -31,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function btnNotAllowed(btn){
         createBtn.classList.add('btn-not-allowed');
     }
+    function recipeOpen(){
+        const recipeNotOpenedToRemove = document.querySelector('.recipe-not-open--block');
+        recipeEditParent.removeChild(recipeNotOpenedToRemove);
+        recipeEditParent.style.alignSelf = 'start';
+    }
     function recipeClose(){
         let recipeNotOpened =  `
         <div class="recipe-not-open--block">    
@@ -39,11 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         recipeEditParent.innerHTML += recipeNotOpened;
         recipeEditParent.style.alignSelf = 'end';
-    }
-    function recipeOpen(){
-        const recipeNotOpenedToRemove = document.querySelector('.recipe-not-open--block');
-        recipeEditParent.removeChild(recipeNotOpenedToRemove);
-        recipeEditParent.style.alignSelf = 'start';
+        active = true
     }
 
     //Opening and closing modals
@@ -87,21 +90,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 recipesList.prepend(recipeItems[recipeItems.length-1]);
                 recipeItems[recipeItems.length-1].classList.add('selected');
             })
-
             //Deleting recipe not open block
             recipeOpen();
 
+            active = false;
             //Adding recipe edit area
-            
-
+            let recipeBlock = `
+                <div class="recipe--block ${recipCreateInput.value}">
+                    <h2 class="title">${recipCreateInput.value}</h2>
+                    <div class="recipe-open--block">
+                        <span class="recipe-open-text recipe-text">Recipe:</span>
+                        <button class="btn add-ingidient-btn">Add ingridient</button>
+                        <div class="line"></div>
+                        <button class="btn add-description-btn">Add description</button>
+                    </div>
+                </div>
+            `;
+            //Closing all recipe areas
+            const recipeAreas = document.querySelectorAll('.recipe--block');
+            recipeAreas.forEach(item => {
+                item.style.display = 'none';
+            })
+            recipeEditParent.innerHTML += recipeBlock;
         }
     })
-
     //Adding styles to recipes(items) and btn when it's active or not
     recipesList.addEventListener('click', e => {
-        const recipeItems = document.querySelectorAll('li');
+        const recipeItems = document.querySelectorAll('li'),
+        recipeAreas = document.querySelectorAll('.recipe--block');
         recipeItems.forEach(item => {
             item.classList.remove('selected');
+        })
+        recipeAreas.forEach(item => {
+            item.style.display = 'none';
         })
         if ( e.target.matches('.item') ) {
             deleteBtnIcon.src = '/img/icons/delete.png';
@@ -111,11 +132,21 @@ document.addEventListener('DOMContentLoaded', () => {
             recipesList.prepend(e.target);
             //Deleting recipe not open block
             recipeOpen();
+            active = false;
+            //Opening an selected recipe
+            recipeAreas.forEach(item => {
+                if (item.classList.contains(e.target.textContent)) {
+                    item.style.display = 'block';
+                }
+            })
         } else {
             deleteBtn.classList.add('btn-not-allowed');
             deleteBtnIcon.src = '/img/icons/delete not available.png';
+
             //Adding recipe not open block
-            recipeClose();
+            if ( !active ) {
+                recipeClose();
+            }
         }
 
         //Deliting items
@@ -125,9 +156,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     item.remove();
                 }
             })
+            deleteBtnIcon.src = '/img/icons/delete.png';
+            btnAllowed(deleteBtn);
+            const recipesNotOpenedToRemove = document.querySelectorAll('.recipe-not-open--block'),
+            recipeAreas = document.querySelectorAll('.recipe--block');
+            recipeEditParent.removeChild(recipesNotOpenedToRemove);
+            recipesNotOpenedToRemove.forEach(item => {
+                item.remove();
+            })
+            recipeEditParent.innerHTML += recipeNotOpened;
+            recipeEditParent.style.alignSelf = 'end';
+            active = true;
         })
     })
-
     //Validating the recipe adding input
     recipCreateInput.addEventListener('input', () => {
         if ( recipCreateInput.value !== '' ) {
@@ -136,4 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             btnNotAllowed(createBtn);
         }
     })
+
+    const addIngridientBtn = document.querySelector('.add-ingidient-btn');
+
+    
 })

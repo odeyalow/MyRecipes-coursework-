@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         recipeEditParent = document.querySelector('.recipe-edit-area');
     //Dynamic adding recipe not open block
     let recipeNotOpened = `
-        <div class="recipe-not-open--block">    
-            <p class="text">Create a new recipe or select an existing one</p>
-        </div>
+        
     `;
     recipeEditParent.innerHTML += recipeNotOpened;
 
@@ -37,16 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const recipeNotOpenedToRemove = document.querySelector('.recipe-not-open--block');
         recipeNotOpenedToRemove && recipeEditParent.removeChild(recipeNotOpenedToRemove);
         recipeEditParent.style.alignSelf = 'start';
-    }
-    function recipeClose() {
-        let recipeNotOpened = `
-        <div class="recipe-not-open--block">    
-            <p class="text">Create a new recipe or select an existing one</p>
-        </div>
-        `;
-        recipeEditParent.innerHTML += recipeNotOpened;
-        recipeEditParent.style.alignSelf = 'end';
-        active = true
     }
 
     //Opening and closing modals

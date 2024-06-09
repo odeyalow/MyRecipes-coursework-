@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {К
     const recipesData = {
     },
     createBtn = document.querySelector('.create-btn'),
@@ -312,11 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         descriptionBlock.previousElementSibling.style.display = 'block';
     })
-    // areaOpenBlock.addEventListener('click', e => {
-    //     if(e.target.classList.contains('delete-description-btn')){
-            
-    //     }
-    // })
     //tracking changes
     editAreaParent.addEventListener('input', e => {
         if (e.target.classList.contains('ingridient-name')) {

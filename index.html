@@ -139,6 +139,7 @@
     
                         <div class="list">
                             <ul class="items__container">
+
                             </ul>
                         </div>
                     </div>
@@ -148,6 +149,13 @@
                     <div class="recipe-not-open--block">    
                         <p class="text">Create a new recipe or select an existing one</p>
                     </div>
+
+                    <div class="recipe-open--block">
+                        <span class="recipe-open-text recipe-text">Recipe:</span>
+                        <button class="btn add-ingidient-btn">Add ingridient</button>
+                        <div class="line"></div>
+                        <button class="btn add-description-btn">Add description</button>
+                    </div>
                 </div>
             </div>
 
@@ -155,7 +163,7 @@
                 <div class="modal add-new-recipe__modal">
                     <span class="title">Create a new recipe</span>
                     <form>
-                        <input class="ingridient-name" type="text" name="Ingridient name">
+                        <input class="recipe-name" type="text" name="Ingridient name">
                         <div class="modal-btns--block">
                             <button class="btn cancel-btn btn-allowed">Cancel</button>
                             <button disabled class="btn create-btn btn-not-allowed">Create</button>
@@ -163,11 +171,19 @@
                     </form>
                 </div>
 
+                <div class="modal delete-recipe__modal">
+                    <span class="title">Are you sure you want to delete the recipe?</span>
+                    <div class="modal-btns--block">
+                        <button class="btn cancel-btn btn-allowed">Cancel</button>
+                        <button class="btn confirm-delete-btn btn-allowed">Delete</button>
+                    </div>
+                </div>
+
                 <div class="modal delete-description__modal">
                     <span class="title">Are you sure you want to delete the description?</span>
                     <div class="modal-btns--block">
                         <button class="btn cancel-btn btn-allowed">Cancel</button>
-                        <button class="btn create-btn btn-allowed">Delete</button>
+                        <button class="btn confirm-delete-btn btn-allowed">Delete</button>
                     </div>
                 </div>
 
@@ -181,8 +197,6 @@
 
     <!-- Закомментированый код для использования -->
     
-
-
     <!-- Добавление рецепта в блок для перемещения по рецептам(items__container): -->
     <!-- <li class="item">${Заголовок при добавлении}</li> -->
 
@@ -245,7 +259,7 @@
     <!-- Закомментированый код для использования -->
 
     <!-- <script src="/js/autoresize-textarea.js"></script> -->
-    <script src="/js/add-recipe-modal.js"></script>
+    <script src="/js/modals.js"></script>
     <script src="/js/create-recipe.js"></script>
 </body>
 </html>

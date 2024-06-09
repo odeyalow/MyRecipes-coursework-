@@ -377,24 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {К
 
     //download file
     downloadBtn.addEventListener('click', function() {    
-        // Преобразование объекта в JSON строку
         const jsonData = JSON.stringify(recipesData, null, 2);
-    
-        // Создание Blob из JSON строки
         const blob = new Blob([jsonData], { type: 'application/json' });
-    
-        // Создание ссылки на Blob
         const url = URL.createObjectURL(blob);
-    
-        // Создание временного элемента <a> для скачивания файла
         const a = document.createElement('a');
         a.href = url;
         a.download = 'data.json';
-    
-        // Программное нажатие на ссылку для скачивания файла
         a.click();
-    
-        // Освобождение URL
         URL.revokeObjectURL(url);
     });
 

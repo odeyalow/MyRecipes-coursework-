@@ -159,8 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {К
             //add edit area
             hideOrShowRecipeNotOpenBlock('hide');
             hideOrShowRecipeOpenBlock('show');
-            // descriptionBlock.style.display = 'none';
-            // descriptionBlock.previousElementSibling.style.display = 'block';
 
             getIngridients(e.target.textContent);
 

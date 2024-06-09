@@ -1,14 +1,23 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const descr = document.querySelector('textarea');
-
-    function autoResizeTextarea(){
-        descr.style.height = 'auto';
-        descr.style.height = descr.scrollHeight + 'px';
-        descr.scrollIntoView();
+    const descrParent = document.querySelector('.recipe-open--block');
+    function autoResizeTextarea(item){
+        item.style.height = 'auto';
+        item.style.height = item.scrollHeight + 'px';
+        item.scrollIntoView();
     }
-    descr.addEventListener('keyup', autoResizeTextarea())
-    descr.addEventListener('keydown', autoResizeTextarea())
-    window.addEventListener('resize', autoResizeTextarea());
+    descrParent.addEventListener('keyup', e => {
+        if(e.target.tagName.toLowerCase() === 'textarea'){
+            autoResizeTextarea(e.target);
+        }
+    })
+    descrParent.addEventListener('keydown', e => {
+        if(e.target.tagName.toLowerCase() === 'textarea'){
+            autoResizeTextarea(e.target);
+        }
+    })
+    window.addEventListener('resize', e => {
+        autoResizeTextarea(e.target);
+    });
 })

@@ -312,6 +312,10 @@ nav .btn{
 .add-new-recipe__form ::placeholder{
     color: rgb(217, 4, 41);
 }
+
+.description-created--block{
+    display: none;
+}
 .description{
     width: 100%;
     max-width: 100%;

@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const createBtn = document.querySelector('.create-btn'),
+    const recipesData = {
+    },
+    createBtn = document.querySelector('.create-btn'),
     recipeNameInput = document.querySelector('.recipe-name'),
     modalsContainer = document.querySelector('.modals'),
     modals = document.querySelectorAll('.modals .modal'),
@@ -10,8 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
     editAreaParent = document.querySelector('.recipe-edit-area'),
     areaNotOpenBlock = editAreaParent.firstElementChild,
     areaOpenBlock = editAreaParent.lastElementChild,
-    addIngridientBtn = document.querySelector('.add-ingidient-btn');
-
+    addIngridientBtn = document.querySelector('.add-ingidient-btn'),
+    descriptionBlock = document.querySelector('.description-created--block'),
+    deleteDescriptionBtn = document.querySelectorAll('.delete-description-btn'),
+    description = document.querySelector('.description');
+    //Validation input
+    recipeNameInput.addEventListener('input', () => {
+        if(recipeNameInput.value.length > 0){
+            btnAllowed(createBtn);
+        } else {
+            btnNotAllowed(createBtn);
+        }
+    })
     function btnAllowed(btn){
         btn.removeAttribute('disabled', '');
         btn.classList.remove('btn-not-allowed');
@@ -24,20 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function addRecipeToList(recipeName){
         if(recipeName.value.length > 11){
-            recipesList.insertAdjacentHTML('afterbegin', `<li class="item selected">${recipeName.value.slice(0, 11)}</li>`);
+            recipesList.insertAdjacentHTML('beforeend', `<li class="item selected">${recipeName.value.slice(0, 11)}</li>`);
         }else{
-            recipesList.insertAdjacentHTML('afterbegin', `<li class="item selected">${recipeName.value}</li>`);
+            recipesList.insertAdjacentHTML('beforeend', `<li class="item selected">${recipeName.value}</li>`);
         }
     }
     function addRecipeData(){
         recipesData[recipeNameInput.value] = {};
         recipesData[recipeNameInput.value]["name"] = recipeNameInput.value;
         recipesData[recipeNameInput.value]["ingridients"] = [];
-        recipesData[recipeNameInput.value]["descrition"] = "";
     }
     function removeRecipeData(key){
         delete recipesData[key];
-    } 
+    }
     function removeSelectedAll(){
         const recipesListItems = document.querySelectorAll('li');
         recipesListItems.forEach(item => {
@@ -46,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function addSelected(item){
         item.classList.add('selected');
-        recipesList.prepend(item); 
     }
     function hideOrShowRecipeNotOpenBlock(hideOrShow){
         if(hideOrShow == 'hide'){
@@ -71,28 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     function getIngridients(name){
-        
-        areaOpenBlock.firstElementChild.insertAdjacentHTML(
-            'afterend', 
-            `<div class="ingridient-and-numbering">
-            <span class="ingridient-numbering">1.</span>
-            <form class="add-new-recipe__form">
-                <input type="text" class="ingridient-name" placeholder="Ingridient name">
-
-                <div class="amount-unit--block">
-                    <input type="tel" class="ingridient-amount" placeholder="0">
-                    <select class="ingridient-unit">
-                        <option class="unit-option" value="pcs">pcs</option>
-                        <option class="unit-option" value="tsp">tsp</option>
-                        <option class="unit-option" value="tbsp">tbsp</option>
-                        <option class="unit-option" value="cup">cup</option>
-                        <option class="unit-option" value="g">g</option>
-                        <option class="unit-option" value="kg">kg</option>
-                    </select>
-                </div>
-            </form>
-        </div>`);
-
         let areaOpenBlockIngridients = document.querySelectorAll('.ingridient-and-numbering');
         areaOpenBlockIngridients.forEach(item => {
             item.remove();
@@ -100,9 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         for (const recipeName in recipesData) {
             if (recipeName === name) {
-                // recipesData[name]["ingridients"].forEach(ingredient => {
-                    
-                // })
                 for (let i = 0; i < recipesData[name]["ingridients"].length; i++) {
                     let ingridientName = recipesData[name]["ingridients"][i]["nameOfIngridient"],
                     ingridientAmount = recipesData[name]["ingridients"][i]["amountOfIngridient"],
@@ -132,31 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    //Validation input
-    recipeNameInput.addEventListener('input', () => {
-        if(recipeNameInput.value.length > 0){
-            btnAllowed(createBtn);
-        } else {
-            btnNotAllowed(createBtn);
-        }
-    })
- 
-    //dynamic recipe data
-    // const recipesData = {
-    //     nameOfRecipe: {
-    //         name: "valueOfRecipeAddInput",
-    //         ingridients: {
-    //             nameOfIngridient:"valueOfIngridientNameInput",
-    //             amountOfIngridient:"valueOfIngridientAmountInput",
-    //             unitOfIngridient:"valueOfIngridientUnitInput"
-    //         },
-    //         description:"valueOfTextArea"
-    //     }
-    // }
-    const recipesData = {
-    }
-
     //add recipe
     createBtn.addEventListener('click', e => {
         e.preventDefault();
@@ -166,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         removeSelectedAll();
         addRecipeToList(recipeNameInput);
-        recipesList.prepend();
 
         btnAllowed(recipeDeleteBtn);
         recipeDeleteBtnIcon.src = '/img/icons/delete.png';
@@ -176,11 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
         //add edit area
         hideOrShowRecipeNotOpenBlock('hide');
         hideOrShowRecipeOpenBlock('show');
-        
-        getIngridients(e.target.textContent);
-        console.log(recipesData);
-    })
+        descriptionBlock.style.display = 'none';
+        descriptionBlock.previousElementSibling.style.display = 'block';
+        // getDescription();
+        description.style.height = 'auto';
 
+        getIngridients();
+    })
     //recipe selected/not selected
     recipesList.addEventListener('click', e  => {
         //item selection
@@ -195,9 +156,26 @@ document.addEventListener('DOMContentLoaded', () => {
             //add edit area
             hideOrShowRecipeNotOpenBlock('hide');
             hideOrShowRecipeOpenBlock('show');
-            // cleanIngridients();
+            // descriptionBlock.style.display = 'none';
+            // descriptionBlock.previousElementSibling.style.display = 'block';
 
             getIngridients(e.target.textContent);
+
+            //geting description
+            if(!recipesData[e.target.textContent]["description"]){
+                descriptionBlock.previousElementSibling.style.display = 'block';
+                descriptionBlock.style.display = 'none';
+            } else {
+                descriptionBlock.previousElementSibling.style.display = 'none';
+                descriptionBlock.style.display = 'block';
+                description.value = '';
+                description.style.height = 'auto';
+                if(recipesData[e.target.textContent] && recipesData[e.target.textContent]["description"]){
+                    description.value = recipesData[e.target.textContent]["description"];
+                    description.style.height = description.scrollHeight + 'px';
+                    description.scrollIntoView();
+                }
+            }
         }else{
             btnNotAllowed(recipeDeleteBtn);
             recipeDeleteBtnIcon.src = '/img/icons/delete not available.png';
@@ -206,9 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cleanIngridients();
         }
     })
-
     //recipe delete
-    btnNotAllowed(recipeDeleteBtn);
     confirmDeleteBtn.addEventListener('click', e => {
         const recipesListItems = document.querySelectorAll('li');
         recipesListItems.forEach(item => {
@@ -221,9 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
         recipeDeleteBtnIcon.src = '/img/icons/delete not available.png';
         hideOrShowRecipeNotOpenBlock('show');
         hideOrShowRecipeOpenBlock('hide');
-        console.log(recipesData);
+        descriptionBlock.previousElementSibling.style.display = 'block';
     })
-
     // add ingredient
     addIngridientBtn.addEventListener('click', e => {
         // add ingredient to recipeData
@@ -261,14 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </select>
                                     </div>
                                 </form>
-                            </div>`);
+                        </div>`);
                     }
                 }
             }
         });
-        console.log(recipesData);
     });
-
     // delete ingredient
     editAreaParent.addEventListener('dblclick', e => {
         if (e.target.classList.contains('ingridient-name')) {
@@ -300,7 +273,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-
+    //add description
+    areaOpenBlock.addEventListener('click', e => {
+        if(e.target.classList.contains('add-description-btn')){
+            descriptionBlock.style.display = 'block';
+            const recipesListItems = document.querySelectorAll('li');
+            recipesListItems.forEach(item => {
+                if (item.classList.contains('selected')) {
+                    for (const recipeName in recipesData) {
+                        if (recipeName === item.textContent) {
+                            recipesData[item.textContent]["description"] = "";
+                        }
+                    }
+                }
+            });
+            description.value = '';
+            e.target.style.display = 'none';
+        }
+    })
+    //delete description
+    areaOpenBlock.addEventListener('click', e => {
+        if(e.target.classList.contains('delete-description-btn')){
+            const recipesListItems = document.querySelectorAll('li');
+            descriptionBlock.style.display = 'none';
+            recipesListItems.forEach(item => {
+                if (item.classList.contains('selected')) {
+                    for (const recipeName in recipesData) {
+                        if (recipeName === item.textContent) {
+                            delete recipesData[item.textContent]["description"];
+                        }
+                    }
+                }
+            });
+            descriptionBlock.previousElementSibling.style.display = 'block';
+        }
+    })
     //tracking changes
     editAreaParent.addEventListener('input', e => {
         if (e.target.classList.contains('ingridient-name')) {
@@ -344,6 +351,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (recipeName === item.textContent) {
                             let ingredients = recipesData[recipeName]["ingridients"];
                             ingredients[ingridientIndex]["unitOfIngridient"] = e.target.value;
+                        }
+                    }
+                }
+            });
+        }
+    });
+    editAreaParent.addEventListener('input', e => {
+        if (e.target.classList.contains('description')) {
+            const recipesListItems = document.querySelectorAll('li');
+            let ingridientIndex = Number(e.target.dataset.index);
+            recipesListItems.forEach(item => {
+                if (item.classList.contains('selected')) {
+                    for (const recipeName in recipesData) {
+                        if (recipeName === item.textContent) {
+                            recipesData[recipeName]["description"] = e.target.value
+                            console.log(recipesData[recipeName]);
                         }
                     }
                 }

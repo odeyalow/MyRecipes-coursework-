@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     descriptionBlock = document.querySelector('.description-created--block'),
     description = document.querySelector('.description'),
     downloadBtn = document.querySelector('.download-btn'),
-    dropArea = document.querySelector('.drop-area');
+    uploadBtn = document.querySelector('.upload-btn');
     // Validation input
     recipeNameInput.addEventListener('input', () => {
         if(recipeNameInput.value.length > 0){
@@ -407,35 +407,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //upload file
-    ['dragover'].forEach(eventName => {
-        dropArea.addEventListener(eventName, () => {
-            dropArea.classList.add('highlight');
-        }, false);
-    });
-    
-    ['dragleave'].forEach(eventName => {
-        dropArea.addEventListener(eventName, () => {
-            dropArea.classList.remove('highlight');
-        }, false);
-    });
-    
-    dropArea.ondrop = e => {
+    function openFile() {
+        document.getElementById('fileInput').click();
+    }
+    uploadBtn.addEventListener('click', e => {
         e.preventDefault();
-    
-        const file = e.dataTransfer.files[0];
+        openFile();
+    })
+
+    document.getElementById('fileInput').addEventListener('change', e => {
+        const file = e.target.files[0];
         const reader = new FileReader();
     
-        reader.onload = event => {
+        reader.onload = function(event) {
             const contents = event.target.result;
-            getData(contents);
+            Object.keys(recipesData).forEach(key => delete recipesData[key]);
+            Object.assign(recipesData, JSON.parse(contents));
+
+            for (const recipe in recipesData) {
+                if(recipe.length > 11){
+                    recipesList.insertAdjacentHTML('beforeend', `<li class="item">${recipe.slice(0, 11)}...</li>`);
+                }else{
+                    recipesList.insertAdjacentHTML('beforeend', `<li class="item">${recipe}</li>`);
+                }
+            }
+
+            console.log(recipesData);
         };
     
         reader.readAsText(file);
-    };
-    
-    function getData(data) {
-        const parsedData = JSON.parse(data);
-        console.log(parsedData);
-    }
-    
+    });
 })

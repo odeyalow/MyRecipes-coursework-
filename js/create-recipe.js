@@ -373,4 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
+    //changing language
+    
 })

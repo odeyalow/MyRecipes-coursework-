@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {К
+document.addEventListener('DOMContentLoaded', () => {
     const recipesData = {
     },
     createBtn = document.querySelector('.create-btn'),

@@ -14,7 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     areaOpenBlock = editAreaParent.lastElementChild,
     addIngridientBtn = document.querySelector('.add-ingidient-btn'),
     descriptionBlock = document.querySelector('.description-created--block'),
-    description = document.querySelector('.description');
+    description = document.querySelector('.description'),
+    downloadBtn = document.querySelector('.download-btn'),
+    dropArea = document.querySelector('.drop-area');
     // Validation input
     recipeNameInput.addEventListener('input', () => {
         if(recipeNameInput.value.length > 0){
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function addRecipeToList(recipeName){
         if(recipeName.value.length > 11){
-            recipesList.insertAdjacentHTML('beforeend', `<li class="item selected">${recipeName.value.slice(0, 11)}</li>`);
+            recipesList.insertAdjacentHTML('beforeend', `<li class="item selected">${recipeName.value.slice(0, 11)}...</li>`);
         }else{
             recipesList.insertAdjacentHTML('beforeend', `<li class="item selected">${recipeName.value}</li>`);
         }
@@ -106,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <option class="unit-option" value="tsp">tsp</option>
                                         <option class="unit-option" value="tbsp">tbsp</option>
                                         <option class="unit-option" value="cup">cup</option>
+                                        <option class="unit-option" value="l">l</option>
+                                        <option class="unit-option" value="ml">ml</option>
                                         <option class="unit-option" value="g">g</option>
                                         <option class="unit-option" value="kg">kg</option>
                                     </select>
@@ -230,6 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <option class="unit-option" value="tsp">tsp</option>
                                             <option class="unit-option" value="tbsp">tbsp</option>
                                             <option class="unit-option" value="cup">cup</option>
+                                            <option class="unit-option" value="l">l</option>
+                                            <option class="unit-option" value="ml">ml</option>
                                             <option class="unit-option" value="g">g</option>
                                             <option class="unit-option" value="kg">kg</option>
                                         </select>
@@ -369,11 +375,67 @@ document.addEventListener('DOMContentLoaded', () => {
                     for (const recipeName in recipesData) {
                         if (recipeName === item.textContent) {
                             recipesData[recipeName]["description"] = e.target.value
-                            console.log(recipesData[recipeName]);
                         }
                     }
                 }
             });
         }
     });
+
+    //download file
+    downloadBtn.addEventListener('click', function() {    
+        // Преобразование объекта в JSON строку
+        const jsonData = JSON.stringify(recipesData, null, 2);
+    
+        // Создание Blob из JSON строки
+        const blob = new Blob([jsonData], { type: 'application/json' });
+    
+        // Создание ссылки на Blob
+        const url = URL.createObjectURL(blob);
+    
+        // Создание временного элемента <a> для скачивания файла
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.json';
+    
+        // Программное нажатие на ссылку для скачивания файла
+        a.click();
+    
+        // Освобождение URL
+        URL.revokeObjectURL(url);
+    });
+
+
+    //upload file
+    ['dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => {
+            dropArea.classList.add('highlight');
+        }, false);
+    });
+    
+    ['dragleave'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => {
+            dropArea.classList.remove('highlight');
+        }, false);
+    });
+    
+    dropArea.ondrop = e => {
+        e.preventDefault();
+    
+        const file = e.dataTransfer.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = event => {
+            const contents = event.target.result;
+            getData(contents);
+        };
+    
+        reader.readAsText(file);
+    };
+    
+    function getData(data) {
+        const parsedData = JSON.parse(data);
+        console.log(parsedData);
+    }
+    
 })

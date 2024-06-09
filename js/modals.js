@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         recipeNameInput = document.querySelector('.recipe-name'),
         recipeDeleteBtn = document.querySelector('.delete-btn'),
         confirmDeleteBtns = document.querySelectorAll('.confirm-delete-btn'),
-        deleteDescriptionBtn = document.querySelector('.delete-description-btn');
+        deleteDescriptionBtn = document.querySelector('.delete-description-btn'),
+        uploadBtn = document.querySelector('.upload-btn'),
+        dropArea = document.querySelector('.drop-area');
     function showModal(indexOfModal){
         modalsContainer.style.display = 'flex';
         modals[indexOfModal].style.display = 'flex';
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             closeModal(0);
             recipeNameInput.value = '';
+            dropArea.classList.remove('highlight');
         })
     })
     recipeDeleteBtn.addEventListener('click', e => {
@@ -43,5 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     deleteDescriptionBtn.addEventListener('click', e => {
         showModal(2);
+    })
+    uploadBtn.addEventListener('click', e => {
+        showModal(3);
     })
 })

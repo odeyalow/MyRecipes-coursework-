@@ -8,15 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
     recipesList = document.querySelector('.items__container'),
     recipeDeleteBtnIcon = document.querySelector('.delete-btn img'),
     recipeDeleteBtn = document.querySelector('.delete-btn'),
-    confirmDeleteBtn = document.querySelector('.confirm-delete-btn'),
+    confirmDeleteBtns = document.querySelectorAll('.confirm-delete-btn'),
     editAreaParent = document.querySelector('.recipe-edit-area'),
     areaNotOpenBlock = editAreaParent.firstElementChild,
     areaOpenBlock = editAreaParent.lastElementChild,
     addIngridientBtn = document.querySelector('.add-ingidient-btn'),
     descriptionBlock = document.querySelector('.description-created--block'),
-    deleteDescriptionBtn = document.querySelectorAll('.delete-description-btn'),
     description = document.querySelector('.description');
-    //Validation input
+    // Validation input
     recipeNameInput.addEventListener('input', () => {
         if(recipeNameInput.value.length > 0){
             btnAllowed(createBtn);
@@ -185,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
     //recipe delete
-    confirmDeleteBtn.addEventListener('click', e => {
+    confirmDeleteBtns[0].addEventListener('click', e => {
         const recipesListItems = document.querySelectorAll('li');
         recipesListItems.forEach(item => {
             if(item.classList.contains('selected')){
@@ -292,22 +291,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
     //delete description
-    areaOpenBlock.addEventListener('click', e => {
-        if(e.target.classList.contains('delete-description-btn')){
-            const recipesListItems = document.querySelectorAll('li');
-            descriptionBlock.style.display = 'none';
-            recipesListItems.forEach(item => {
-                if (item.classList.contains('selected')) {
-                    for (const recipeName in recipesData) {
-                        if (recipeName === item.textContent) {
-                            delete recipesData[item.textContent]["description"];
-                        }
+    confirmDeleteBtns[1].addEventListener('click', e => {
+        e.preventDefault();
+        const recipesListItems = document.querySelectorAll('li');
+        descriptionBlock.style.display = 'none';
+        recipesListItems.forEach(item => {
+            if (item.classList.contains('selected')) {
+                for (const recipeName in recipesData) {
+                    if (recipeName === item.textContent) {
+                        delete recipesData[item.textContent]["description"];
                     }
                 }
-            });
-            descriptionBlock.previousElementSibling.style.display = 'block';
-        }
+            }
+        });
+        descriptionBlock.previousElementSibling.style.display = 'block';
     })
+    // areaOpenBlock.addEventListener('click', e => {
+    //     if(e.target.classList.contains('delete-description-btn')){
+            
+    //     }
+    // })
     //tracking changes
     editAreaParent.addEventListener('input', e => {
         if (e.target.classList.contains('ingridient-name')) {
@@ -373,7 +376,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-
-    //changing language
-    
 })

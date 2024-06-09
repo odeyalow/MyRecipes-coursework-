@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cancelBtn = document.querySelectorAll('.cancel-btn'),
         recipeNameInput = document.querySelector('.recipe-name'),
         recipeDeleteBtn = document.querySelector('.delete-btn'),
-        confirmDeleteBtn = document.querySelector('.confirm-delete-btn');
+        confirmDeleteBtns = document.querySelectorAll('.confirm-delete-btn'),
+        deleteDescriptionBtn = document.querySelector('.delete-description-btn');
     function showModal(indexOfModal){
         modalsContainer.style.display = 'flex';
         modals[indexOfModal].style.display = 'flex';
@@ -34,7 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         showModal(1);
     })
-    confirmDeleteBtn.addEventListener('click', e => {
-        closeModal(2);
+    confirmDeleteBtns.forEach(item => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            closeModal(2);
+        })
+    })
+    deleteDescriptionBtn.addEventListener('click', e => {
+        showModal(2);
     })
 })

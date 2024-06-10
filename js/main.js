@@ -386,8 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
         a.click();
         URL.revokeObjectURL(url);
     });
-
-
     //upload file
     function openFile() {
         document.getElementById('fileInput').click();
@@ -418,5 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     
         reader.readAsText(file);
+    });
+
+    window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = 'Вы действительно хотите покинуть страницу?';
+        return 'Вы действительно хотите покинуть страницу?';
     });
 })

@@ -163,10 +163,21 @@ document.addEventListener('DOMContentLoaded', () => {
             getIngridients(e.target.textContent);
 
             //geting description
-            if(!recipesData[e.target.textContent]["description"]){
-                descriptionBlock.previousElementSibling.style.display = 'block';
-                descriptionBlock.style.display = 'none';
-            } else {
+            // if(!recipesData[e.target.textContent]["description"]){
+            //     descriptionBlock.previousElementSibling.style.display = 'block';
+            //     descriptionBlock.style.display = 'none';
+            // } else {
+            //     descriptionBlock.previousElementSibling.style.display = 'none';
+            //     descriptionBlock.style.display = 'block';
+            //     description.value = '';
+            //     description.style.height = 'auto';
+            //     if(recipesData[e.target.textContent] && recipesData[e.target.textContent]["description"]){
+            //         description.value = recipesData[e.target.textContent]["description"];
+            //         description.style.height = description.scrollHeight + 'px';
+            //         description.scrollIntoView();
+            //     }
+            // }
+            if(recipesData[e.target.textContent] && recipesData[e.target.textContent]["description"]){
                 descriptionBlock.previousElementSibling.style.display = 'none';
                 descriptionBlock.style.display = 'block';
                 description.value = '';
@@ -176,6 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     description.style.height = description.scrollHeight + 'px';
                     description.scrollIntoView();
                 }
+            } else {
+                descriptionBlock.previousElementSibling.style.display = 'block';
+                descriptionBlock.style.display = 'none';
             }
         }else{
             btnNotAllowed(recipeDeleteBtn);
@@ -394,7 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         openFile();
     })
-
     document.getElementById('fileInput').addEventListener('change', e => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -411,16 +424,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     recipesList.insertAdjacentHTML('beforeend', `<li class="item">${recipe}</li>`);
                 }
             }
-
-            console.log(recipesData);
         };
     
         reader.readAsText(file);
     });
 
-    window.addEventListener('beforeunload', function (e) {
-        e.preventDefault();
-        e.returnValue = 'Вы действительно хотите покинуть страницу?';
-        return 'Вы действительно хотите покинуть страницу?';
+    window.addEventListener('beforeunload', e => {
+        if (Object.values(recipesData).length > 0) {
+            const jsonRecipeData = JSON.stringify(recipesData);
+            window.localStorage.setItem('savedRecipes', jsonRecipeData);
+            e.preventDefault();
+            e.returnValue = 'Вы действительно хотите покинуть страницу?';
+        }
     });
 })
